@@ -48,6 +48,10 @@ function missingTwimlApplicationError(context, error) {
 
 async function getTwiMLApplicationStatus(context) {
   const client = context.getTwilioClient();
+  if (context.TWILIO_REGION) {
+    client.region = context.TWILIO_REGION;
+  }
+
   const friendlyName = context.APP_NAME;
   const status = {
     valid: false,
@@ -119,6 +123,10 @@ async function getTwiMLApplicationStatus(context) {
 
 async function getIncomingNumberStatus(context) {
   const client = context.getTwilioClient();
+  if (context.TWILIO_REGION) {
+    client.region = context.TWILIO_REGION;
+  }
+
   const status = {
     valid: false,
     title: "Incoming Number is wired up correctly",
@@ -198,6 +206,9 @@ async function getIncomingNumberStatus(context) {
 
 async function getCallerIdStatus(context) {
   const client = context.getTwilioClient();
+  if (context.TWILIO_REGION) {
+    client.region = context.TWILIO_REGION;
+  }
   const callerId = context.CALLER_ID;
   const status = {
     valid: false,
@@ -250,6 +261,9 @@ async function getCallerIdStatus(context) {
 
 async function getTwiMLApplicationIsWiredUp(context) {
   const client = context.getTwilioClient();
+  if (context.TWILIO_REGION) {
+    client.region = context.TWILIO_REGION;
+  }
   const expectedFn = `https://${context.DOMAIN_NAME}${urlForSiblingPage(
     "client-voice-twiml-app",
     context.PATH,
@@ -297,6 +311,9 @@ async function getTwiMLApplicationIsWiredUp(context) {
 
 async function getAPIKeyAndSecretFromEnvStatus(context) {
   const client = context.getTwilioClient();
+  if (context.TWILIO_REGION) {
+    client.region = context.TWILIO_REGION;
+  }
   const status = {
     title:
       "The API Key and Secret for minting Access Tokens is accessible from the current environment",

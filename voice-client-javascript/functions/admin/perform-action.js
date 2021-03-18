@@ -11,6 +11,9 @@ exports.handler = async function (context, event, callback) {
     return;
   }
   const client = context.getTwilioClient();
+  if (context.TWILIO_REGION) {
+    client.region = context.TWILIO_REGION;
+  }
   const environment = await getCurrentEnvironment(context);
   const actions = new Actions(client, {
     friendlyName: context.APP_NAME,

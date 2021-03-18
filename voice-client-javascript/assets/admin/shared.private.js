@@ -37,6 +37,9 @@ async function getCurrentEnvironment(context) {
     return;
   }
   const client = context.getTwilioClient();
+  if (context.TWILIO_REGION) {
+    client.region = context.TWILIO_REGION;
+  }
   const services = await client.serverless.services.list();
   for (let service of services) {
     const environments = await client.serverless
@@ -54,6 +57,9 @@ async function getCurrentEnvironment(context) {
 
 async function getEnvironmentVariables(context, environment) {
   const client = context.getTwilioClient();
+  if (context.TWILIO_REGION) {
+    client.region = context.TWILIO_REGION;
+  }
   return await client.serverless
     .services(environment.serviceSid)
     .environments(environment.sid)
@@ -68,6 +74,9 @@ async function getEnvironmentVariable(context, environment, key) {
 
 async function setEnvironmentVariable(context, environment, key, value, override=true) {
   const client = context.getTwilioClient();
+  if (context.TWILIO_REGION) {
+    client.region = context.TWILIO_REGION;
+  }
   try {
     const currentVariable = await getEnvironmentVariable(
       context,
